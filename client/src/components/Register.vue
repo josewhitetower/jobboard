@@ -6,14 +6,14 @@
         <v-toolbar flat dense class="cyan" dark>
           <v-toolbar-title>Register</v-toolbar-title>
         </v-toolbar>
-        <div class="pl-4 pr-4 pb-2 pt-2">
-            <v-text-field  label="title"  ref ="title" > </v-text-field>
-            <v-text-field label="company" ref ="company"></v-text-field>
-            <v-text-field label="description" ref ="description" ></v-text-field>
-            <v-btn @click="register">Register</v-btn>
-             <v-btn @click="clear">clear</v-btn>
+        <v-form class="pl-4 pr-4 pb-2 pt-2" ref="form">
+            <v-text-field  label="title"  v-model ="title" > </v-text-field>
+            <v-text-field label="company" v-model ="company"></v-text-field>
+            <v-text-field label="description" v-model ="description" ></v-text-field>
+             <v-btn flat light @click="clear">clear</v-btn>
+            <v-btn @click="register" class="cyan">Register</v-btn>
             <div v-html="error" class="error"></div>
-          </div>
+          </v-form>
       </div>
     </v-flex>
   </v-layout>
@@ -26,6 +26,9 @@ export default {
   name: "Register",
   data() {
     return {
+      title:"",
+      description:"",
+      company:"",
       error: null
     };
   },
@@ -33,11 +36,12 @@ export default {
     async register(){  
       
         const Job = {
-          title:this.$refs.title.value,
-          company:this.$refs.company.value,
-          description:this.$refs.description.value        
+          title:this.title,
+          company:this.company,
+          description:this.description
         }   
         const response = await AuthenticationService.register(Job)
+        console.log(Job);
         console.log(response);
      
          this.error = response.data.error;
@@ -46,9 +50,7 @@ export default {
       //  this.$router.push('/') 
     },
     clear(){
-      this.$refs.title.value=""
-      this.$refs.company.value=""
-      this.$refs.description.value=""
+      this.$refs.form.reset(); 
     }
   }
 };
