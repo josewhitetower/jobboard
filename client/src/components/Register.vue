@@ -12,7 +12,9 @@
             <v-text-field label="description" v-model ="description" ></v-text-field>
              <v-btn flat light @click="clear">clear</v-btn>
             <v-btn @click="register" class="cyan">Register</v-btn>
-            <div v-html="error" class="error"></div>
+          <v-alert color="error" icon="warning" v-model="alerts" dismissible>
+             {{error}}
+             </v-alert>
           </v-form>
       </div>
     </v-flex>
@@ -29,7 +31,8 @@ export default {
       title:"",
       description:"",
       company:"",
-      error: null
+      error: "",
+      alerts:false
     };
   },
   methods:{
@@ -44,7 +47,11 @@ export default {
         console.log(Job);
         console.log(response);
      
-         this.error = response.data.error;
+        
+         if (response.data.error) {
+            this.error = response.data.error;
+            this.alerts=true;
+         }
      
       //TODO: Redirect or update the jobs view
       //  this.$router.push('/') 
