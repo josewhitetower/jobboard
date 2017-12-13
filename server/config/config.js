@@ -5,5 +5,8 @@ module.exports = {
     user: process.env.DB_USER || 'root',
     password: process.env.DB_PASS || 'root',
     host: process.env.DB_HOST || 'localhost'
+  },
+  authentication: {
+    jwtSecret: process.env.JWT_SECRET || 'secret'
   }
 }

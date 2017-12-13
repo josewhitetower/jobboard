@@ -56,10 +56,8 @@ export default {
           password:this.password,
          
         }   
-        const response = await AuthenticationService.login(User)
-        console.log(User);
-        console.log(response);
-     
+        const response = await AuthenticationService.login(User)        
+        console.log(response);    
         
          if (response.data.error) {
             this.error = response.data.error;
