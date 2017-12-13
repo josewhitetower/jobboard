@@ -6,7 +6,7 @@
 
 <script>
 
-import AuthenticationService from '../services/AuthenticationService';
+import JobService from '../services/JobService';
 export default {
   name: "JobBoard",
     data() {
@@ -16,7 +16,7 @@ export default {
     };
   },
   mounted:function () {    
-     AuthenticationService.getJobs()
+     JobService.getJobs()
       .then( params =>  this.jobs=params.data)
   },
 

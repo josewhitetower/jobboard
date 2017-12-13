@@ -1,13 +1,26 @@
 <template>
-  <div id="app">
-    <router-view/>
-  </div>
+
+    <v-app>     
+      <v-content fluid>
+        <v-container>
+           <div id="app">
+           <page-header></page-header>
+           <router-view/>
+             </div>
+        </v-container>
+      </v-content>
+
+    </v-app>
+
 </template>
 
 <script>
-/* eslint-disable */
+import PageHeader from './components/PageHeader'
 export default {
-  name: 'app'
+  name: 'app',
+  components: {
+    PageHeader
+  }
 }
 </script>
 

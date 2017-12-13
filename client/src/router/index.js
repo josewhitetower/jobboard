@@ -1,7 +1,10 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import JobBoard from '@/components/JobBoard'
+import JobAdd from '@/components/JobAdd'
+import Index from '@/components/Index'
 import Register from '@/components/Register'
+import Login from '@/components/Login'
 
 Vue.use(Router)
 
@@ -10,8 +13,8 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'JobBard',
-      component: JobBoard
+      name: 'Index ',
+      component: Index
     },
     {
       path: '/register',
@@ -19,9 +22,19 @@ export default new Router({
       component: Register
     },
     {
+      path: '/login',
+      name: 'login',
+      component: Login
+    },
+    {
       path: '/jobs',
       name: 'jobs',
       component: JobBoard
+    },
+    {
+      path: '/add',
+      name: 'add',
+      component: JobAdd
     }
   ]
 })

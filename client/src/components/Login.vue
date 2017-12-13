@@ -3,7 +3,7 @@
     <v-flex xs6 offset-xs3>
       <div class="white elevation-2">
         <v-toolbar flat dense class="cyan" dark>
-          <v-toolbar-title>Register</v-toolbar-title>
+          <v-toolbar-title>Login</v-toolbar-title>
         </v-toolbar>
         <v-form class="pl-4 pr-4 pb-2 pt-2" ref="form">     
           <v-text-field
@@ -19,7 +19,7 @@
                 required
               ></v-text-field>
              
-            <v-btn @click="register" class="cyan" dark>register</v-btn>
+            <v-btn @click="login" class="cyan" dark>login</v-btn>
           <v-alert color="error" icon="warning" v-model="alerts" dismissible>
              {{error}}
              </v-alert>
@@ -49,14 +49,14 @@ export default {
         }
   },
    methods:{
-    async register(){  
+    async login(){  
       
         const User = {
           email:this.email,
           password:this.password,
          
         }   
-        const response = await AuthenticationService.register(User)
+        const response = await AuthenticationService.login(User)
         console.log(User);
         console.log(response);
      

@@ -3,12 +3,15 @@ const router = express.Router()
 const mongoose = require('mongoose')
 const config = require('../config/config.js')
 const JobController = require('../controllers/JobController')
+const AuthenticationController = require('../controllers/AuthenticationController')
 const Job = require('../models/Job')
 
 mongoose.connect(`mongodb://${config.db.host}/${config.db.database}`)
 mongoose.Promise = global.Promise
 
-router.post('/register', JobController.register)
+router.post('/add', JobController.register)
+router.post('/register', AuthenticationController.register)
+router.post('/login', AuthenticationController.login)
 router.get('/jobs', JobController.jobs)
 router.get('/', (req, res, next) => {
   Job.find({})
