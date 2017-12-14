@@ -13,7 +13,8 @@ module.exports = {
   register (req, res, next) {
     User.create(req.body)
       .then(user => {
-        res.send(user)
+        const token = jwtSignUser(req.body)
+        res.send({user, token})
       })
       .catch(next)
   },
@@ -27,12 +28,15 @@ module.exports = {
       if (!user) {
         return res.send({error: 'The email was incorrect'})
       }
-      const isPasswordValid = password === user.password
-      if (!isPasswordValid) {
-        return res.send({error: 'The password  was incorrect'})
-      }
-      const token = jwtSignUser({email: email, password: password})
-      return res.send({user, token})
+      user.comparePassword(password, function (err, isMatch) {
+        if (err) throw err
+        if (!isMatch) {
+          return res.send({error: 'The password  was incorrect'})
+        } else {
+          const token = jwtSignUser({email: email, password: password})
+          return res.send({user, token})
+        }
+      })
     })
   }
 }

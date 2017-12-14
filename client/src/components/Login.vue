@@ -5,7 +5,7 @@
         <v-toolbar flat dense class="cyan" dark>
           <v-toolbar-title>Login</v-toolbar-title>
         </v-toolbar>
-        <v-form class="pl-4 pr-4 pb-2 pt-2" ref="form">     
+        <v-form class="pl-4 pr-4 pb-2 pt-2" ref="form" lazy-validation v-model="valid">     
           <v-text-field
                 label="E-mail"
                 v-model="email"
@@ -17,9 +17,14 @@
                 v-model="password"
                 :rules="passwordRules"
                 required
+                :type="'password'"
               ></v-text-field>
              
-            <v-btn @click="login" class="cyan" dark>login</v-btn>
+            <v-btn 
+              @click="login"
+               class="cyan" dark
+               :disabled="!valid"
+               >login</v-btn>
           <v-alert color="error" icon="warning" v-model="alerts" dismissible>
              {{error}}
              </v-alert>
@@ -33,11 +38,10 @@ import AuthenticationService from "../services/AuthenticationService.js";
 export default {
     data () {
         return {
-            valid: false,
+            valid: true,
             password: '',
             passwordRules: [
-                (v) => !!v || 'Password is required',
-                (v) => v.length >= 3 || 'Password must be more than 3 characters'
+                (v) => !!v || 'Password is required'              
             ],
             email: '',
             emailRules: [
@@ -64,8 +68,10 @@ export default {
             this.alerts=true;
          }
          else{
+             this.$store.dispatch('setToken', response.data.token)
+             this.$store.dispatch('setUser', response.data.user)
              this.$refs.form.reset(); 
-             this.$router.push('/jobs') 
+            //  this.$router.push('/jobs') 
          }
      
       //TODO: Redirect or update the jobs view

@@ -5,7 +5,12 @@
         <v-toolbar flat dense class="cyan" dark>
           <v-toolbar-title>Register</v-toolbar-title>
         </v-toolbar>
-        <v-form class="pl-4 pr-4 pb-2 pt-2" ref="form">     
+        <v-form 
+          class="pl-4 pr-4 pb-2 pt-2" 
+          ref="form" 
+          v-model="valid" 
+          lazy-validation
+          >     
           <v-text-field
                 label="E-mail"
                 v-model="email"
@@ -17,9 +22,29 @@
                 v-model="password"
                 :rules="passwordRules"
                 required
+                min="3"
+              :append-icon="e1 ? 'visibility' : 'visibility_off'"
+              :append-icon-cb="() => (e1 = !e1)"
+              :type="e1 ? 'password' : 'text'"
+              counter
+              ></v-text-field>
+          <v-text-field
+                label="Confirm Password"
+                v-model="confirmPassword"
+                :rules="confirmPasswordRules"
+                required
+                 min="3"
+              :append-icon="e2 ? 'visibility' : 'visibility_off'"
+              :append-icon-cb="() => (e2 = !e2)"
+              :type="e2 ? 'password' : 'text'"
+              counter
               ></v-text-field>
              
-            <v-btn @click="register" class="cyan" dark>register</v-btn>
+            <v-btn 
+              @click="register" 
+              class="cyan" dark
+              :disabled="!valid"
+              >register</v-btn>
           <v-alert color="error" icon="warning" v-model="alerts" dismissible>
              {{error}}
              </v-alert>
@@ -33,19 +58,24 @@ import AuthenticationService from "../services/AuthenticationService.js";
 export default {
     data () {
         return {
-            valid: false,
+            valid: true,
             password: '',
             passwordRules: [
                 (v) => !!v || 'Password is required',
                 (v) => v.length >= 3 || 'Password must be more than 3 characters'
             ],
+            confirmPassword:'',
+            confirmPasswordRules: [
+              (v)=> this.password ===this.confirmPassword || 'Passwords do not coincide'],
             email: '',
             emailRules: [
                 (v) => !!v || 'E-mail is required',
                 (v) => /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(v) || 'E-mail must be valid'
             ],
             error:null,
-            alerts:false
+            alerts:false,
+            e1:true,
+            e2:true
         }
   },
    methods:{
@@ -66,6 +96,8 @@ export default {
             this.alerts=true;
          }
          else{
+             this.$store.dispatch('setToken', response.data.token)
+             this.$store.dispatch('setUser', response.data.user)
              this.$refs.form.reset(); 
              this.$router.push('/jobs') 
          }
