@@ -1,10 +1,7 @@
 <template>
   <v-layout column>
     <v-flex xs6 offset-xs3>
-      <div class="white elevation-2">
-        <v-toolbar flat dense class="cyan" dark>
-          <v-toolbar-title>Login</v-toolbar-title>
-        </v-toolbar>
+      <panel title = "Login">
         <v-form class="pl-4 pr-4 pb-2 pt-2" ref="form" lazy-validation v-model="valid">     
           <v-text-field
                 label="E-mail"
@@ -28,14 +25,18 @@
           <v-alert color="error" icon="warning" v-model="alerts" dismissible>
              {{error}}
              </v-alert>
-          </v-form>
-      </div>
+          </v-form> 
+      </panel>
     </v-flex>
   </v-layout>
 </template>
 <script>
 import AuthenticationService from "../services/AuthenticationService.js";
+import Panel from "./Panel";
 export default {
+    components: {
+      Panel
+    },
     data () {
         return {
             valid: true,
@@ -71,7 +72,7 @@ export default {
              this.$store.dispatch('setToken', response.data.token)
              this.$store.dispatch('setUser', response.data.user)
              this.$refs.form.reset(); 
-            //  this.$router.push('/jobs') 
+             this.$router.push('/jobs') 
          }
      
       //TODO: Redirect or update the jobs view

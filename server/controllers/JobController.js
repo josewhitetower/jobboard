@@ -1,17 +1,24 @@
 const Job = require('../models/Job')
 
 module.exports = {
-  register (req, res, next) {
-    Job.create(req.body)
+  async add (req, res, next) {
+    await Job.create(req.body)
       .then(job => {
         res.send(job)
       })
       .catch(next)
   },
-  jobs  (req, res, next) {
-    Job.find({})
+  async jobs  (req, res, next) {
+    await Job.find({})
       .then(jobs => {
         res.send(jobs)
+      })
+      .catch(next)
+  },
+  async show (req, res, next) {
+    await Job.findById(req.params.id)
+      .then(job => {
+        res.send(job)
       })
       .catch(next)
   }

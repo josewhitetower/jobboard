@@ -1,10 +1,7 @@
 <template>
   <v-layout column>
     <v-flex xs6 offset-xs3>
-      <div class="white elevation-2">
-        <v-toolbar flat dense class="cyan" dark>
-          <v-toolbar-title>Register</v-toolbar-title>
-        </v-toolbar>
+      <panel title="Register">
         <v-form 
           class="pl-4 pr-4 pb-2 pt-2" 
           ref="form" 
@@ -48,14 +45,18 @@
           <v-alert color="error" icon="warning" v-model="alerts" dismissible>
              {{error}}
              </v-alert>
-          </v-form>
-      </div>
+          </v-form>      
+      </panel>
     </v-flex>
   </v-layout>
 </template>
 <script>
 import AuthenticationService from "../services/AuthenticationService.js";
+import Panel from "./Panel";
 export default {
+    components: {
+      Panel
+    },
     data () {
         return {
             valid: true,

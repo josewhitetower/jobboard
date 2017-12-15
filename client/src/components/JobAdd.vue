@@ -2,21 +2,18 @@
 
   <v-layout column>
     <v-flex xs6 offset-xs3>
-      <div class="white elevation-2">
-        <v-toolbar flat dense class="cyan" dark>
-          <v-toolbar-title>Job</v-toolbar-title>
-        </v-toolbar>
-        <v-form class="pl-4 pr-4 pb-2 pt-2" ref="form">
-            <v-text-field  label="Title"  v-model ="title" > </v-text-field>
-            <v-text-field label="Company" v-model ="company"></v-text-field>
-            <v-text-field label="Description" v-model ="description" ></v-text-field>
+     <panel title="Add a job">
+        <v-form class="pl-4 pr-4 pb-2 pt-2" ref="form" lazy-validation v-model="valid">
+            <v-text-field  label="Title"  v-model ="job.title" required :rules="titleRules" > </v-text-field>
+            <v-text-field label="Company" v-model ="job.company" required :rules="companyRules" ></v-text-field>
+            <v-text-field label="Description" v-model ="job.description" required  :rules="descriptionRules" ></v-text-field>
              <v-btn flat light @click="clear">clear</v-btn>
-            <v-btn @click="add" class="cyan">add</v-btn>
+            <v-btn @click="add" class="cyan"  :disabled="!valid">add</v-btn>
           <v-alert color="error" icon="warning" v-model="alerts" dismissible>
              {{error}}
              </v-alert>
-          </v-form>
-      </div>
+          </v-form>  
+       </panel>   
     </v-flex>
   </v-layout>
 
@@ -24,25 +21,38 @@
 
 <script>
 import JobService from '../services/JobService';
+import Panel from './Panel';
 export default {
   name: "JobAdd",
+  components:{
+    Panel
+  },
   data() {
     return {
-      title:"",
-      description:"",
-      company:"",
+      valid: true,
+      job:  {        
+        title:"",
+        description:"",
+        company:"",
+      },
       error: "",
-      alerts:false
+      alerts:false,
+      titleRules: [
+                (v) => !!v || 'Title is required'              
+            ],
+      companyRules: [
+                (v) => !!v || 'Company is required'              
+            ],
+      descriptionRules: [
+                (v) => !!v || 'Description is required'              
+            ],
+            
     };
   },
   methods:{
     async add(){  
       
-        const Job = {
-          title:this.title,
-          company:this.company,
-          description:this.description
-        }   
+        const Job = this.job
         const response = await JobService.add(Job)
         console.log(Job);
         console.log(response);
@@ -51,10 +61,10 @@ export default {
          if (response.data.error) {
             this.error = response.data.error;
             this.alerts=true;
+         } else {            
+            this.$refs.form.reset(); 
+            this.$router.push('/jobs') 
          }
-     
-      //TODO: Redirect or update the jobs view
-      //  this.$router.push('/') 
     },
     clear(){
       this.$refs.form.reset(); 

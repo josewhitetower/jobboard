@@ -6,5 +6,8 @@ export default {
   },
   getJobs () {
     return Api().get()
+  },
+  show (id) {
+    return Api().get(`jobs/${id}`)
   }
 }
