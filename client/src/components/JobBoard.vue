@@ -1,6 +1,6 @@
 <template>
   <v-layout column>
-    <v-flex xs6 offset-xs3>
+    <v-flex>
       <panel title="Jobs">
         <router-link 
           :to="{name: 'add'}"
@@ -25,7 +25,7 @@
                 <div class="job-company">     {{job.company}}</div>
                 <div class="job-description">     {{job.description}}</div>
                   <v-btn 
-                  @click="navigateTo('/jobs/'+job._id)" 
+                  @click="navigateTo({ path: `jobs/${job._id}`})" 
                   class="cyan" >View</v-btn>
               </v-flex>
            
@@ -48,7 +48,8 @@ export default {
   data() {
     return {
       title: "Job Board",
-      jobs: []
+      jobs: [],
+      id: null
     };
   },
   mounted: async function() {
