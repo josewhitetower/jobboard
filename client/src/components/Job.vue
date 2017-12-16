@@ -6,7 +6,13 @@
             <v-layout>
               <v-flex >
                  <div class="job-company">     {{job.company}}</div>
-                <div class="job-description">     {{job.description}}</div>                
+                <div class="job-description">     {{job.description}}</div>   
+                 <v-btn 
+                 v-if="$store.state.isUserLoggedIn"  
+                  @click="navigateTo({ path: `/jobs/${job._id}/edit`})" 
+                  class="cyan" 
+                  dark
+                  >Edit </v-btn>             
               </v-flex>
            
             </v-layout>
@@ -34,6 +40,11 @@ export default {
      await JobService.show(id).then(job => {
          this.job = job.data
      })
+  },
+  methods: {
+    navigateTo(route) {
+      this.$router.push(route);
+    }
   }
 }
 </script>

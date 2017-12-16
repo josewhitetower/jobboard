@@ -8,7 +8,7 @@
             <v-text-field label="Company" v-model ="job.company" required :rules="companyRules" ></v-text-field>
             <v-text-field label="Description" v-model ="job.description" required  :rules="descriptionRules" textarea></v-text-field>
              <v-btn flat light @click="clear">clear</v-btn>
-            <v-btn @click="add" class="cyan"  :disabled="!valid">add</v-btn>
+            <v-btn @click="save" class="cyan"  :disabled="!valid">save</v-btn>
           <v-alert color="error" icon="warning" v-model="alerts" dismissible>
              {{error}}
              </v-alert>
@@ -49,11 +49,16 @@ export default {
             
     };
   },
+  async mounted(){
+      const id = this.$store.state.route.params.id
+     await JobService.show(id).then(job => {
+         this.job = job.data
+     })
+  },
   methods:{
-    async add(){  
-      
+    async save(){        
         const Job = this.job
-        const response = await JobService.add(Job)
+        const response = await JobService.put(Job)
         console.log(Job);
         console.log(response);
      
@@ -62,8 +67,8 @@ export default {
             this.error = response.data.error;
             this.alerts=true;
          } else {            
-            this.$refs.form.reset(); 
-            this.$router.push('/jobs') 
+            this.$refs.form.reset();           
+            this.$router.push(`/jobs/${this.job._id}`) 
          }
     },
     clear(){

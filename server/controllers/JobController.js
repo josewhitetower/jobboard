@@ -21,5 +21,12 @@ module.exports = {
         res.send(job)
       })
       .catch(err => res.send({error: err}))
+  },
+  async edit (req, res, next) {
+    await Job.findByIdAndUpdate(req.params.id, req.body)
+      .then(job => {
+        res.send(job)
+      })
+      .catch(err => res.send({error: err}))
   }
 }

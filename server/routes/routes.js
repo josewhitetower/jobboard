@@ -14,6 +14,7 @@ router.post('/register', AuthenticationController.register)
 router.post('/login', AuthenticationController.login)
 router.get('/jobs', JobController.jobs)
 router.get('/jobs/:id', JobController.show)
+router.put('/jobs/:id', JobController.edit)
 router.get('/', (req, res, next) => {
   Job.find({})
     .then(jobs => {

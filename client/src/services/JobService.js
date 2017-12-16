@@ -1,13 +1,16 @@
 import Api from './Api'
 
 export default {
-  add (credentials) {
-    return Api().post('add', credentials)
+  add (job) {
+    return Api().post('add', job)
   },
   getJobs () {
     return Api().get()
   },
   show (id) {
     return Api().get(`jobs/${id}`)
+  },
+  put (job) {
+    return Api().put(`jobs/${job._id}`, job)
   }
 }

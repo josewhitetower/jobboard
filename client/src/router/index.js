@@ -47,11 +47,6 @@ export default new Router({
       path: '/add',
       name: 'add',
       component: JobAdd
-    },
-    {
-      path: '/add',
-      name: 'add',
-      component: JobAdd
     }
   ]
 })

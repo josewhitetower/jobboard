@@ -6,7 +6,8 @@
           :to="{name: 'add'}"
            slot="action"
            >
-              <v-btn             
+              <v-btn      
+                v-if="$store.state.isUserLoggedIn"       
                 fab
                 class="cyan accent-2"
                 light
@@ -26,7 +27,7 @@
                 <div class="job-description">     {{job.description}}</div>
                   <v-btn 
                   @click="navigateTo({ path: `jobs/${job._id}`})" 
-                  class="cyan" >View</v-btn>
+                  class="cyan" dark >View</v-btn>
               </v-flex>
            
             </v-layout>
