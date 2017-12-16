@@ -6,6 +6,7 @@ import Index from '@/components/Index'
 import Register from '@/components/Register'
 import Login from '@/components/Login'
 import Job from '@/components/Job'
+import JobEdit from '@/components/JobEdit'
 
 Vue.use(Router)
 
@@ -36,6 +37,16 @@ export default new Router({
       path: '/jobs/:id',
       name: 'job',
       component: Job
+    },
+    {
+      path: '/jobs/:id/edit',
+      name: 'edit',
+      component: JobEdit
+    },
+    {
+      path: '/add',
+      name: 'add',
+      component: JobAdd
     },
     {
       path: '/add',

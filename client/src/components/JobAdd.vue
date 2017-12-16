@@ -6,7 +6,7 @@
         <v-form class="pl-4 pr-4 pb-2 pt-2" ref="form" lazy-validation v-model="valid">
             <v-text-field  label="Title"  v-model ="job.title" required :rules="titleRules" > </v-text-field>
             <v-text-field label="Company" v-model ="job.company" required :rules="companyRules" ></v-text-field>
-            <v-text-field label="Description" v-model ="job.description" required  :rules="descriptionRules" ></v-text-field>
+            <v-text-field label="Description" v-model ="job.description" required  :rules="descriptionRules" textarea></v-text-field>
              <v-btn flat light @click="clear">clear</v-btn>
             <v-btn @click="add" class="cyan"  :disabled="!valid">add</v-btn>
           <v-alert color="error" icon="warning" v-model="alerts" dismissible>

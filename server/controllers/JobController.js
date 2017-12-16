@@ -20,6 +20,6 @@ module.exports = {
       .then(job => {
         res.send(job)
       })
-      .catch(next)
+      .catch(err => res.send({error: err}))
   }
 }
