@@ -24,11 +24,11 @@
   
 </template>
 <script>
-import Panel from './Panel';
+import Panel from './Panel'
 import JobService from '../services/JobService.js'
 export default {
- components: {
-     Panel
+  components: {
+   Panel
  },
  data(){
      return {
@@ -43,7 +43,7 @@ export default {
   },
   methods: {
     navigateTo(route) {
-      this.$router.push(route);
+      this.$router.push(route)
     }
   }
 }

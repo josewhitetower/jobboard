@@ -2,7 +2,7 @@
 
   <v-layout column>
     <v-flex xs6 offset-xs3>
-     <panel title="Add a job">
+     <panel title="Edit a job">
         <v-form class="pl-4 pr-4 pb-2 pt-2" ref="form" lazy-validation v-model="valid">
             <v-text-field  label="Title"  v-model ="job.title" required :rules="titleRules" > </v-text-field>
             <v-text-field label="Company" v-model ="job.company" required :rules="companyRules" ></v-text-field>
