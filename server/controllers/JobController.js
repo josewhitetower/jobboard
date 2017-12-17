@@ -9,11 +9,23 @@ module.exports = {
       .catch(next)
   },
   async jobs  (req, res, next) {
-    await Job.find({})
-      .then(jobs => {
-        res.send(jobs)
-      })
-      .catch(next)
+    if (req.query.search) {
+      await Job.find({ $or: [
+        {title: new RegExp(req.query.search, 'i')},
+        {company: new RegExp(req.query.search, 'i')},
+        {description: new RegExp(req.query.search, 'i')}]})
+        .then(jobs => {
+          res.send(jobs)
+        })
+        .catch(next)
+      console.log(req.query.search)
+    } else {
+      await Job.find({})
+        .then(jobs => {
+          res.send(jobs)
+        })
+        .catch(next)
+    }
   },
   async show (req, res, next) {
     await Job.findById(req.params.id)

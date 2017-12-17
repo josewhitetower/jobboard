@@ -1,7 +1,8 @@
 <template>
   <v-layout column>
     <v-flex>
-      <panel title="Jobs">
+      <search></search>
+      <panel title="Jobs" class="mt-3">
         <router-link 
           :to="{name: 'add'}"
            slot="action"
@@ -26,7 +27,7 @@
                 <div class="job-company">     {{job.company}}</div>
                 <div class="job-description">     {{job.description}}</div>
                   <v-btn 
-                  @click="navigateTo({ path: `jobs/${job._id}`})" 
+                 :to="{ path: `jobs/${job._id}`}" 
                   class="cyan" dark >View</v-btn>
               </v-flex>
            
@@ -39,12 +40,13 @@
 </template>
 
 <script>
-import Panel from "./Panel";
+
+import Search from "./Search";
 import JobService from "../services/JobService";
 export default {
   name: "JobBoard",
   components: {
-    Panel
+    Search
   },
   data() {
     return {
@@ -53,21 +55,21 @@ export default {
       id: null
     };
   },
-  mounted: async function() {
-    await JobService.getJobs().then(jobs => (this.jobs = jobs.data));
-  },
-  methods: {
-    navigateTo(route) {
-      this.$router.push(route);
-    },
-}
+  watch: {
+    '$route.query.search': {
+      immediate: true,
+      async handler(value){
+        await JobService.getJobs(value).then(jobs => (this.jobs = jobs.data));
+      }
+    }
+  } 
 }
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 .job{
-  border: 2px solid cyan;
+  border-bottom: 2px solid cyan;
   margin-top: 20px;
   padding: 10px;
   height: 200px;

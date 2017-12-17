@@ -52,11 +52,8 @@
 </template>
 <script>
 import AuthenticationService from "../services/AuthenticationService.js";
-import Panel from "./Panel";
 export default {
-    components: {
-      Panel
-    },
+
     data () {
         return {
             valid: true,

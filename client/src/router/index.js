@@ -2,7 +2,6 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import JobBoard from '@/components/JobBoard'
 import JobAdd from '@/components/JobAdd'
-import Index from '@/components/Index'
 import Register from '@/components/Register'
 import Login from '@/components/Login'
 import Job from '@/components/Job'
@@ -13,11 +12,6 @@ Vue.use(Router)
 export default new Router({
   mode: 'history',
   routes: [
-    {
-      path: '/',
-      name: 'Index ',
-      component: Index
-    },
     {
       path: '/register',
       name: 'register',
@@ -47,6 +41,9 @@ export default new Router({
       path: '/add',
       name: 'add',
       component: JobAdd
-    }
+    },
+    {
+      path: '*',
+      redirect: '/jobs'}
   ]
 })

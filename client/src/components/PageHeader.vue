@@ -3,15 +3,18 @@
     <v-toolbar fixed class="cyan"  dark>
         <span class="PageHeader-logo">
             <v-toolbar-title 
-                class="mr-4"
-                @click="navigateTo('/')"
-            >
-                Job Board
+                class="mr-4">
+                <router-link
+                    class="home"
+                    tag ="span"
+                    :to = "{path : '/'}"
+                >
+                    Job Board
+                </router-link>
             </v-toolbar-title>
         </span>
-         <v-btn flat dark
-                 
-                    @click="navigateTo({name: 'jobs'})"
+         <v-btn flat dark                 
+                    :to="{name: 'jobs'}"
                 >
                   Browse
                 </v-btn>
@@ -20,13 +23,13 @@
             <!-- <router-link to="register"> -->
                 <v-btn flat dark
                     v-if="!$store.state.isUserLoggedIn"
-                    @click="navigateTo({name: 'login'})"
+                    :to="{name: 'login'}"
                 >
                     Log in
                 </v-btn>
                 <v-btn flat dark
                     v-if="!$store.state.isUserLoggedIn"
-                    @click="navigateTo({name: 'register', params : {id:123}})"
+                    :to="{name: 'register'}"
                 >
                     Sign Up
                 </v-btn>
@@ -45,13 +48,11 @@
 <script>
 export default {
   methods: {
-    navigateTo(route) {
-      this.$router.push(route);
-    },
+  
     logout() {
       this.$store.dispatch("setToken", null);
       this.$store.dispatch("setUser", null);
-      this.navigateTo("/");
+       this.$router.push('/');
     }
   }
 };

@@ -9,7 +9,7 @@
                 <div class="job-description">     {{job.description}}</div>   
                  <v-btn 
                  v-if="$store.state.isUserLoggedIn"  
-                  @click="navigateTo({ path: `/jobs/${job._id}/edit`})" 
+                  :to="{ path: `/jobs/${job._id}/edit`}" 
                   class="cyan" 
                   dark
                   >Edit </v-btn>             
@@ -24,12 +24,10 @@
   
 </template>
 <script>
-import Panel from './Panel'
+
 import JobService from '../services/JobService.js'
 export default {
-  components: {
-   Panel
- },
+
  data(){
      return {
          job: {}
@@ -40,11 +38,6 @@ export default {
      await JobService.show(id).then(job => {
          this.job = job.data
      })
-  },
-  methods: {
-    navigateTo(route) {
-      this.$router.push(route)
-    }
   }
 }
 </script>

@@ -21,12 +21,10 @@
 
 <script>
 import JobService from '../services/JobService';
-import Panel from './Panel';
+
 export default {
   name: "JobAdd",
-  components:{
-    Panel
-  },
+  
   data() {
     return {
       valid: true,

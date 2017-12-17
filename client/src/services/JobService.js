@@ -4,8 +4,12 @@ export default {
   add (job) {
     return Api().post('add', job)
   },
-  getJobs () {
-    return Api().get()
+  getJobs (search) {
+    return Api().get('jobs', {
+      params: {
+        search: search
+      }
+    })
   },
   show (id) {
     return Api().get(`jobs/${id}`)
