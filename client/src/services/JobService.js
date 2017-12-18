@@ -19,6 +19,6 @@ export default {
   },
   delete (job) {
     console.log('deleting')
-    return Api().delete(`jobs/${job._id}`, job)
+    return Api().delete(`jobs/${job._id}`)
   }
 }

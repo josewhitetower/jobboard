@@ -16,7 +16,7 @@
                  <v-btn 
                  v-if="$store.state.isUserLoggedIn" 
                  @click="deleteJob"
-                  class="cyan" 
+                  class="danger"                   
                   dark
                   >Delete </v-btn>             
               </v-flex>
@@ -48,7 +48,7 @@ export default {
   methods: {
       async deleteJob(){
       const id = this.$store.state.route.params.id
-      await JobService.delete(id)
+      await JobService.delete(this.job)
 
       }
   }

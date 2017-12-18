@@ -42,10 +42,8 @@ module.exports = {
       .catch(err => res.send({error: err}))
   },
   async delete (req, res, next) {
-    await Job.remove({ _id: req.params.id })
-      .then(job => {
-        console.log(job)
-      })
-      .catch(err => res.send({error: err}))
+    await Job.findByIdAndRemove(req.params.id).then(res => {
+      res.send({err: 'Job deleted'})// TODO: Improve
+    }).catch(next)
   }
 }
