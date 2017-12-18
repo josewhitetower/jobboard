@@ -15,6 +15,7 @@ router.post('/login', AuthenticationController.login)
 router.get('/jobs', JobController.jobs)
 router.get('/jobs/:id', JobController.show)
 router.put('/jobs/:id', JobController.edit)
+router.delete('/jobs/:id', JobController.delete)
 router.get('/', (req, res, next) => {
   Job.find({})
     .then(jobs => {

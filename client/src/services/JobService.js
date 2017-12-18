@@ -16,5 +16,9 @@ export default {
   },
   put (job) {
     return Api().put(`jobs/${job._id}`, job)
+  },
+  delete (job) {
+    console.log('deleting')
+    return Api().delete(`jobs/${job._id}`, job)
   }
 }
