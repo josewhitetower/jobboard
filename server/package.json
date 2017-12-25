@@ -1,14 +1,14 @@
 {
   "name": "server",
   "version": "1.0.0",
-  "description": "",
+  "description": "A simple Job board API",
   "main": "index.js",
   "scripts": {
     "start": "./node_modules/nodemon/bin/nodemon.js src/index.js --exec 'npm run lint && node' ",
     "lint": "./node_modules/.bin/eslint **/*.js"
   },
   "keywords": [],
-  "author": "",
+  "author": "Jose Torreblanca",
   "license": "ISC",
   "dependencies": {
     "bcrypt-nodejs": "0.0.3",
@@ -29,5 +29,8 @@
     "eslint-plugin-node": "^5.2.1",
     "eslint-plugin-promise": "^3.6.0",
     "eslint-plugin-standard": "^3.0.1"
+  },
+  "engines": {
+    "node": "8.9.3"
   }
 }
