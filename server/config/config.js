@@ -1,3 +1,5 @@
+require('dotenv').config({ path: 'variables.env' })
+
 module.exports = {
   port: 8081,
   db: {

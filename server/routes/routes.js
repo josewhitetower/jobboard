@@ -6,7 +6,7 @@ const JobController = require('../controllers/JobController')
 const AuthenticationController = require('../controllers/AuthenticationController')
 const Job = require('../models/Job')
 
-mongoose.connect(`mongodb://${config.db.host}/${config.db.database}`)
+mongoose.connect(`mongodb://${config.db.user}:${config.db.password}@${config.db.host}/${config.db.database}`)
 mongoose.Promise = global.Promise
 
 router.post('/add', JobController.add)
