@@ -30,27 +30,26 @@
   
 </template>
 <script>
-
-import JobService from '../services/JobService.js'
+import JobService from '../services/JobService.js';
 export default {
-
- data(){
-     return {
-         job: {}
-     }
- },  
- async  mounted(){
-     const id = this.$store.state.route.params.id
-     await JobService.show(id).then(job => {
-         this.job = job.data
-     })
+  data () {
+    return {
+      job: {}
+    }
+  },
+  async mounted () {
+    const id = this.$store.state.route.params.id
+    await JobService.show(id).then(job => {
+      this.job = job.data
+    })
   },
   methods: {
-      async deleteJob(){
+    async deleteJob () {
       const id = this.$store.state.route.params.id
-      await JobService.delete(this.job)
-
-      }
+      await JobService.delete(this.job).then(() => {
+        this.$router.push('/jobs')
+      })
+    }
   }
 }
 </script>
