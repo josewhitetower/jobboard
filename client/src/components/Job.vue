@@ -30,7 +30,7 @@
   
 </template>
 <script>
-import JobService from '../services/JobService.js';
+import JobService from '../services/JobService.js'
 export default {
   data () {
     return {
@@ -45,7 +45,6 @@ export default {
   },
   methods: {
     async deleteJob () {
-      const id = this.$store.state.route.params.id
       await JobService.delete(this.job).then(() => {
         this.$router.push('/jobs')
       })

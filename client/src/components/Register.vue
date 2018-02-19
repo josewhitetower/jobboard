@@ -1,6 +1,6 @@
 <template>
   <v-layout column>
-    <v-flex xs6 offset-xs3>
+    <v-flex >
       <panel title="Register">
         <v-form 
           class="pl-4 pr-4 pb-2 pt-2" 

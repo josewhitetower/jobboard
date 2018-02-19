@@ -20,7 +20,7 @@
             <v-icon>add</v-icon>
         </v-btn>
         </router-link>
-          <div v-for="job in jobs" :key="job.id" class="job">
+          <v-card v-for="job in jobs" :key="job.id" class="job">
             <v-layout>
               <v-flex >
                 <div class="job-title ">     {{job.title}}</div>
@@ -33,53 +33,51 @@
            
             </v-layout>
        
-          </div>
+          </v-card>
       </panel>
     </v-flex>
   </v-layout>
 </template>
 
 <script>
-
-import Search from "./Search";
-import JobService from "../services/JobService";
+import Search from './Search'
+import JobService from '../services/JobService'
 export default {
-  name: "JobBoard",
+  name: 'JobBoard',
   components: {
     Search
   },
-  data() {
+  data () {
     return {
-      title: "Job Board",
+      title: 'Job Board',
       jobs: [],
       id: null
-    };
+    }
   },
   watch: {
     '$route.query.search': {
       immediate: true,
-      async handler(value){
-        await JobService.getJobs(value).then(jobs => (this.jobs = jobs.data));
+      async handler (value) {
+        await JobService.getJobs(value).then(jobs => (this.jobs = jobs.data))
       }
     }
-  } 
+  }
 }
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-.job{
+.job {
   border-bottom: 2px solid cyan;
   margin-top: 20px;
   padding: 10px;
   /* height: 200px; */
-
 }
-.job-title{  
+.job-title {
   font-size: 30px;
   text-align: left;
 }
-.job-company{
+.job-company {
   margin-top: 10px;
   text-align: left;
   font-size: 24px;
