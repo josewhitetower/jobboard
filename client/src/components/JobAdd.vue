@@ -25,11 +25,7 @@ export default {
   data () {
     return {
       valid: true,
-      job: {
-        title: '',
-        description: '',
-        company: ''
-      },
+      job: {},
       titleRules: [
         (v) => !!v || 'Title is required'
       ],
