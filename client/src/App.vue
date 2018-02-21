@@ -3,9 +3,20 @@
     <v-app>     
       <v-content fluid>
         <v-container>
-           <div id="app">
+           <div id="app"
+           >
            <page-header></page-header>
            <router-view/>
+           <v-snackbar
+                  v-model="snackbar"
+                  :color= color
+                  :timeout="timeout"
+                  top
+                
+                 >
+              {{ text }}
+      <v-btn dark flat @click.native="snackbar = false">x</v-btn>
+    </v-snackbar>
              </div>
         </v-container>
       </v-content>
@@ -16,10 +27,26 @@
 
 <script>
 import PageHeader from './components/PageHeader'
+
 export default {
   name: 'app',
   components: {
     PageHeader
+  },
+  data () {
+    return {
+      snackbar: null,
+      text: null,
+      color: null,
+      timeout: 3000
+    }
+  },
+  mounted () {
+    this.$bus.$on('message', payload => {
+      this.snackbar = true
+      this.text = payload.message
+      this.color = payload.color
+    })
   }
 }
 </script>

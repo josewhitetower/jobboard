@@ -1,6 +1,6 @@
 <template>
 
-    <v-toolbar fixed class="cyan"  dark>
+    <v-toolbar fixed class="blue"  dark>
         <span class="PageHeader-logo">
             <v-toolbar-title 
                 class="mr-4">
@@ -48,14 +48,15 @@
 <script>
 export default {
   methods: {
-  
-    logout() {
-      this.$store.dispatch("setToken", null);
-      this.$store.dispatch("setUser", null);
-       this.$router.push('/');
+
+    logout () {
+      this.$store.dispatch('setToken', null)
+      this.$store.dispatch('setUser', null)
+      this.$router.push('/')
+      this.$bus.$emit('message', {message: 'User succesfully logged out', color: 'success'})
     }
   }
-};
+}
 </script>
 <style scoped>
 .PageHeader-logo:hover {

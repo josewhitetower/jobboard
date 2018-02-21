@@ -10,32 +10,31 @@
 <script>
 import _ from 'lodash'
 export default {
-data() {
+  data () {
     return {
-        search :""
+      search: ''
     }
-},
-watch :{
-    search: _.debounce( async function (value){
-        const route = {
-            name: 'jobs'
+  },
+  watch: {
+    search: _.debounce(async function (value) {
+      const route = {
+        name: 'jobs'
+      }
+      if (this.search !== '') {
+        route.query = {
+          search: this.search
         }
-        if (this.search!=="") {
-            route.query = {
-                search: this.search
-            }
-        }
-        this.$router.push(route)
-        
+      }
+      this.$router.push(route)
     }, 700),
     '$route.query.search': {
-        immediate: true,
-        handler (value) {
-            this.search= value
-        }
+      immediate: true,
+      handler (value) {
+        this.search = value
+      }
     }
-}
- 
+  }
+
 }
 </script>
 

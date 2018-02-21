@@ -11,6 +11,8 @@ import Panel from './components/Panel.vue'
 import('vuetify/dist/vuetify.min.css') // Ensure you are using css-loader
 
 Vue.use(Vuetify)
+// Bus event for global notifications
+Vue.prototype.$bus = new Vue()
 
 sync(store, router)
 Vue.component('panel', Panel)

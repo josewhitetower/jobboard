@@ -10,7 +10,7 @@
                  <v-btn 
                  v-if="$store.state.isUserLoggedIn"  
                   :to="{ path: `/jobs/${job._id}/edit`}" 
-                  class="cyan" 
+                  class="blue" 
                   dark
                   >Edit </v-btn>             
                  <v-btn 
@@ -45,8 +45,13 @@ export default {
   },
   methods: {
     async deleteJob () {
-      await JobService.delete(this.job).then(() => {
-        this.$router.push('/jobs')
+      await JobService.delete(this.job).then((res) => {
+        if (res.data.error) {
+          this.$bus.$emit('message', {message: res.data.error, color: 'error'})
+        } else {
+          this.$router.push('/jobs')
+          this.$bus.$emit('message', {message: 'Job deleted', color: 'success'})
+        }
       })
     }
   }

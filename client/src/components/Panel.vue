@@ -1,7 +1,7 @@
 <template>
   
       <div class="white elevation-2">
-        <v-toolbar flat dense class="cyan" dark>
+        <v-toolbar flat dense class="blue" dark>
           <v-toolbar-title>{{title}}</v-toolbar-title>
          <slot name="action"></slot>
         </v-toolbar>
@@ -15,7 +15,7 @@
 
 <script>
 export default {
-   props:['title']
+  props: ['title']
 }
 </script>
 

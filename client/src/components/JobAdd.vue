@@ -8,10 +8,7 @@
             <v-text-field label="Company" v-model ="job.company" required :rules="companyRules" ></v-text-field>
             <v-text-field label="Description" v-model ="job.description" required  :rules="descriptionRules" textarea></v-text-field>
              <v-btn flat light @click="clear">clear</v-btn>
-            <v-btn @click="add" class="cyan"  :disabled="!valid">add</v-btn>
-          <v-alert color="error" icon="warning" v-model="alerts" dismissible>
-             {{error}}
-             </v-alert>
+            <v-btn @click="add" class="blue"  :disabled="!valid">add</v-btn>
           </v-form>  
        </panel>   
     </v-flex>
@@ -20,55 +17,48 @@
 </template>
 
 <script>
-import JobService from '../services/JobService';
+import JobService from '../services/JobService'
 
 export default {
-  name: "JobAdd",
+  name: 'JobAdd',
 
-  data() {
+  data () {
     return {
       valid: true,
-      job:  {        
-        title:"",
-        description:"",
-        company:"",
+      job: {
+        title: '',
+        description: '',
+        company: ''
       },
-      error: "",
-      alerts:false,
       titleRules: [
-                (v) => !!v || 'Title is required'              
-            ],
+        (v) => !!v || 'Title is required'
+      ],
       companyRules: [
-                (v) => !!v || 'Company is required'              
-            ],
+        (v) => !!v || 'Company is required'
+      ],
       descriptionRules: [
-                (v) => !!v || 'Description is required'              
-            ],
-            
-    };
+        (v) => !!v || 'Description is required'
+      ]
+
+    }
   },
-  methods:{
-    async add(){  
-      
-        const Job = this.job
-        const response = await JobService.add(Job)
-        console.log(Job);
-        console.log(response);
-     
-        
-         if (response.data.error) {
-            this.error = response.data.error;
-            this.alerts=true;
-         } else {            
-            this.$refs.form.reset(); 
-            this.$router.push('/jobs') 
-         }
+  methods: {
+    async add () {
+      const Job = this.job
+      const response = await JobService.add(Job)
+      if (response.data.error) {
+        this.$bus.$emit('message', {message: response.data.error, color: 'error'})
+      } else {
+        this.$refs.form.reset()
+        this.$router.push('/jobs')
+        this.$bus.$emit('message', {message: 'Job saved', color: 'success'})
+      }
     },
-    clear(){
-      this.$refs.form.reset(); 
+    clear () {
+      this.$refs.form.reset()
     }
   }
-};
+}
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->

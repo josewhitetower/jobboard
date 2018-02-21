@@ -10,7 +10,7 @@
               <v-btn      
                 v-if="$store.state.isUserLoggedIn"       
                 fab
-                class="cyan accent-2"
+                class="blue accent-2"
                 light
                 small
                 absolute
@@ -28,7 +28,7 @@
                 <div class="job-description">     {{job.description}}</div>
                   <v-btn 
                  :to="{ path: `jobs/${job._id}`}" 
-                  class="cyan" dark >View</v-btn>
+                  class="blue" dark >View</v-btn>
               </v-flex>
            
             </v-layout>
@@ -68,7 +68,7 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 .job {
-  border-bottom: 2px solid cyan;
+  border-bottom: 2px solid blue;
   margin-top: 20px;
   padding: 10px;
   /* height: 200px; */

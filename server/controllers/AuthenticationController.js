@@ -34,7 +34,7 @@ module.exports = {
           return res.send({error: 'The password  was incorrect'})
         } else {
           const token = jwtSignUser({email: email, password: password})
-          return res.send({user, token})
+          return res.send({message: 'Welcome...', token, user})
         }
       })
     })
