@@ -66,7 +66,7 @@ export default {
           this.snackbar = true
           this.$refs.form.reset()
           this.$router.push('/')
-          this.$bus.$emit('message', {message: res.data.message, color: 'success'})
+          this.$bus.$emit('message', {message: 'Welcome...', color: 'success'})
         }
       })
       .catch(err => console.log(err))

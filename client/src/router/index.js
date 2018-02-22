@@ -10,7 +10,6 @@ import JobEdit from '@/components/JobEdit'
 Vue.use(Router)
 
 export default new Router({
-  mode: 'history',
   routes: [
     {
       path: '/register',
@@ -43,7 +42,7 @@ export default new Router({
       component: JobAdd
     },
     {
-      path: '*',
-      redirect: '/jobs'}
+      path: '/',
+      component: JobBoard}
   ]
 })
