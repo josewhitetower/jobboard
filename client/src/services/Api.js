@@ -2,7 +2,7 @@ import axios from 'axios'
 const prod = true
 let baserURL
 if (prod) {
-  baserURL = `http://138.68.94.242:443/`
+  baserURL = `http://159.89.27.255/`
 } else {
   baserURL = 'http://localhost:8081'
 }
