@@ -4,6 +4,7 @@ import Vue from 'vue'
 import App from './App'
 import Vuetify from 'vuetify'
 import {sync} from 'vuex-router-sync'
+import VuetifyGoogleAutocomplete from 'vuetify-google-autocomplete'
 import router from './router'
 import store from './store/store'
 import Panel from './components/Panel.vue'
@@ -11,6 +12,9 @@ import Panel from './components/Panel.vue'
 import('vuetify/dist/vuetify.min.css') // Ensure you are using css-loader
 
 Vue.use(Vuetify)
+Vue.use(VuetifyGoogleAutocomplete, {
+  apiKey: 'AIzaSyAY7_AwOvVF1KgOEYF7bTqQGn3tyV-LeHo' // Can also be an object. E.g, for Google Maps Premium API, pass `{ client: <YOUR-CLIENT-ID> }`
+})
 // Bus event for global notifications
 Vue.prototype.$bus = new Vue()
 

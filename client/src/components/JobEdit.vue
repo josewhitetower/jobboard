@@ -6,6 +6,9 @@
         <v-form class="pl-4 pr-4 pb-2 pt-2" ref="form" lazy-validation v-model="valid">
             <v-text-field  label="Title"  v-model ="job.title" required :rules="titleRules" > </v-text-field>
             <v-text-field label="Company" v-model ="job.company" required :rules="companyRules" ></v-text-field>
+              <v-text-field label="Address" v-model ="job.location.address" required :rules="addressRules" ></v-text-field>
+             <v-text-field type="number" label="Address Lng" v-model ="job.location.coordinates[0]" required :rules="addressRules" ></v-text-field>
+            <v-text-field type="number" label="Address Lat" v-model ="job.location.coordinates[1]" required :rules="addressRules" ></v-text-field>
             <v-text-field label="Description" v-model ="job.description" required  :rules="descriptionRules" textarea></v-text-field>
              <v-btn flat light @click="clear">clear</v-btn>
             <v-btn @click="save" class="blue"  :disabled="!valid">save</v-btn>
@@ -25,12 +28,20 @@ export default {
   data () {
     return {
       valid: true,
-      job: {},
+      job: {
+        location: {
+          address: '',
+          coordinates: []
+        }
+      },
       titleRules: [
         (v) => !!v || 'Title is required'
       ],
       companyRules: [
         (v) => !!v || 'Company is required'
+      ],
+      addressRules: [
+        (v) => !!v || 'Address is required'
       ],
       descriptionRules: [
         (v) => !!v || 'Description is required'
