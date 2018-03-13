@@ -3,13 +3,13 @@
   <v-layout column>
     <v-flex>
      <panel title="Add a job">
-        <v-form class="pl-4 pr-4 pb-2 pt-2" ref="form" lazy-validation v-model="valid">
+        <v-form class="pl-4 pr-4 pb-2 pt-2" ref="form"  v-model="valid">
             <v-text-field  label="Title"  v-model ="job.title" required :rules="titleRules" > </v-text-field>
             <v-text-field label="Company" v-model ="job.company" required :rules="companyRules" ></v-text-field>          
             <vuetify-google-autocomplete
                 id="map"
                 append-icon="search"
-                placeholder="Address"
+                placeholder="Address *"
                 ref="address"
                 :required="true"
                 :rules="addressRules"
@@ -35,7 +35,7 @@ export default {
 
   data () {
     return {
-      valid: false,
+      valid: true,
       job: {
         location: {
           address: '',
@@ -55,6 +55,11 @@ export default {
         (v) => !!v || 'Description is required'
       ]
 
+    }
+  },
+  watch: {
+    valid () {
+      console.log(this.valid)
     }
   },
   methods: {
