@@ -57,11 +57,6 @@ export default {
 
     }
   },
-  watch: {
-    valid () {
-      console.log(this.valid)
-    }
-  },
   methods: {
     async add () {
       const Job = this.job
@@ -78,6 +73,7 @@ export default {
     },
     clear () {
       this.$refs.form.reset()
+      this.$refs.address.clear()
     },
     /**
             * When the location found

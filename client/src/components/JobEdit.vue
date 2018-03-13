@@ -82,6 +82,7 @@ export default {
     },
     clear () {
       this.$refs.form.reset()
+      this.$refs.address.clear()
     },
     /**
             * When the location found
