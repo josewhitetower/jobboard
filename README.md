@@ -7,7 +7,7 @@ A simple Job Board with user authentication
 2. [MongoDB](http:///mongodb.org)
 
 ## URL
-1. [Frontend](htpt://jt-jobboard.surge.sh)
+1. [Frontend](http://jt-jobboard.surge.sh)
 1. [Backend](https://jt-jobboard.herokuapp.com/)
 
 ## Install
