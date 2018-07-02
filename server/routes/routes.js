@@ -7,12 +7,9 @@ const JobController = require('../controllers/JobController');
 const AuthenticationController = require('../controllers/AuthenticationController');
 const Job = require('../models/Job');
 
-const prod = config.env;
-if (prod !== 'dev') {
-    mongoose.connect(`mongodb://${config.db.user}:${config.db.password}@${config.db.host}/${config.db.database}`);
-} else {
-    mongoose.connect(`mongodb://${config.db.host}/${config.db.database}`);
-}
+
+mongoose.connect(`mongodb://${config.db.user}:${config.db.password}@${config.db.host}/${config.db.database}`);
+
 mongoose.Promise = global.Promise;
 
 router.post('/add', JobController.add);

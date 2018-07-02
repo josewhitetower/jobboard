@@ -11,12 +11,21 @@ function jwtSignUser(user) {
 
 module.exports = {
     register(req, res, next) {
-        User.create(req.body)
-            .then((user) => {
-                const token = jwtSignUser(req.body);
-                res.send({ user, token });
-            })
-            .catch(next);
+        const { email } = req.body;
+        User.findOne({ email }, (err, u) => {
+            if (u) {
+                return res.send({ error: 'The user already exist' });
+            }
+            User.create(req.body)
+                .then((user) => {
+                    const token = jwtSignUser(req.body);
+                    res.send({ user, token });
+                })
+                .catch(next);
+
+
+            return true;
+        });
     },
     login(req, res) {
         const { email, password } = req.body;
