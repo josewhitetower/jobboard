@@ -2,13 +2,21 @@ const express = require('express');
 
 const router = express.Router();
 const mongoose = require('mongoose');
+
+const multer = require('multer');
 const config = require('../config/config.js');
 const JobController = require('../controllers/JobController');
 const AuthenticationController = require('../controllers/AuthenticationController');
 const Job = require('../models/Job');
 
+const prod = false;
 
-mongoose.connect(`mongodb://${config.db.user}:${config.db.password}@${config.db.host}/${config.db.database}`);
+const connect = prod
+    ? `mongodb://${config.db.user}:${config.db.password}@${config.db.host}/${config.db.database}`
+    : `mongodb://${config.db.host}/${config.db.database}`;
+
+
+mongoose.connect(connect);
 
 mongoose.Promise = global.Promise;
 
