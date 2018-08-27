@@ -6,20 +6,28 @@ import Register from '@/components/Register'
 import Login from '@/components/Login'
 import Job from '@/components/Job'
 import JobEdit from '@/components/JobEdit'
+import firebase from 'firebase'
 
 Vue.use(Router)
 
-export default new Router({
+let router = new Router({
   routes: [
     {
       path: '/register',
       name: 'register',
-      component: Register
+      component: Register,
+      meta: {
+        requiredGuest: true
+      }
+
     },
     {
       path: '/login',
       name: 'login',
-      component: Login
+      component: Login,
+      meta: {
+        requiredGuest: true
+      }
     },
     {
       path: '/jobs',
@@ -34,15 +42,52 @@ export default new Router({
     {
       path: '/jobs/:id/edit',
       name: 'edit',
-      component: JobEdit
+      component: JobEdit,
+      meta: {
+        requiredAuth: true
+      }
     },
     {
       path: '/add',
       name: 'add',
-      component: JobAdd
+      component: JobAdd,
+      meta: {
+        requiredAuth: true
+      }
     },
     {
       path: '/',
       component: JobBoard}
   ]
 })
+
+router.beforeEach((to, from, next) => {
+  if (to.matched.some(record => record.meta.requiredAuth)) {
+    if (!firebase.auth().currentUser) {
+      next({
+        path: '/login',
+        query: {
+          redirect: to.fullPath
+        }
+      })
+    } else {
+      next()
+    }
+  } else if (to.matched.some(record => record.meta.requiredGuest)) {
+    if (firebase.auth().currentUser) {
+      console.log('object')
+      next({
+        path: '/',
+        query: {
+          redirect: to.fullPath
+        }
+      })
+    } else {
+      next()
+    }
+  } else {
+    next()
+  }
+})
+
+export default router

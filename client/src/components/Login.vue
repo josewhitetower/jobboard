@@ -18,7 +18,7 @@
               ></v-text-field>
              
             <v-btn 
-              @click="login"
+              @click.prevent="login"
                class="blue" dark
                :disabled="!valid"
                >login</v-btn>
@@ -30,6 +30,7 @@
 </template>
 <script>
 import AuthenticationService from '../services/AuthenticationService.js'
+import firebase from 'firebase'
 
 export default {
 
@@ -47,8 +48,21 @@ export default {
       ]
     }
   },
+  computed: {
+    user () {
+      return this.$store.getters.user
+    }
+  },
+  watch: {
+    user (value) {
+      if (value !== null && value !== undefined) {
+        this.$router.push('/jobs')
+        this.$bus.$emit('message', {message: 'Welcome...', color: 'success'})
+      }
+    }
+  },
   methods: {
-    async login () {
+    async loginLegacy () {
       const User = {
         email: this.email,
         password: this.password
@@ -61,9 +75,6 @@ export default {
         } else {
           this.$store.dispatch('setToken', res.data.token)
           this.$store.dispatch('setUser', res.data.user)
-          this.text = res.data.message
-          this.color = 'success'
-          this.snackbar = true
           this.$refs.form.reset()
           this.$router.push('/')
           this.$bus.$emit('message', {message: 'Welcome...', color: 'success'})
@@ -76,7 +87,12 @@ export default {
 
       // TODO: Redirect or update the jobs view
       //  this.$router.push('/')
+    },
+    login () {
+      this.$store.dispatch('signUserIn', {email: this.email, password: this.password})
     }
 
-  }}
+  }
+
+}
 </script>
