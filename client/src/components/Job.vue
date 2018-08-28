@@ -8,13 +8,13 @@
                  <div class="job-company">     {{job.company}}</div>
                 <div class="job-description">     {{job.description}}</div>   
                  <v-btn 
-                 v-if="$store.state.isUserLoggedIn"  
+                 v-if="userIsAuthenticated"  
                   :to="{ path: `/jobs/${job._id}/edit`}" 
                   class="blue" 
                   dark
                   >Edit </v-btn>             
                  <v-btn 
-                 v-if="$store.state.isUserLoggedIn" 
+                 v-if="userIsAuthenticated" 
                  @click="deleteJob"
                   class="danger"                   
                   dark
@@ -42,6 +42,14 @@ export default {
     await JobService.show(id).then(job => {
       this.job = job.data
     })
+  },
+  computed: {
+    user () {
+      return this.$store.getters.user
+    },
+    userIsAuthenticated () {
+      return this.$store.getters.userIsAuthenticated
+    }
   },
   methods: {
     async deleteJob () {

@@ -8,7 +8,7 @@
            slot="action"
            >
               <v-btn      
-                v-if="$store.state.isUserLoggedIn"       
+                v-if="userIsAuthenticated"       
                 fab
                 class="blue accent-2"
                 light
@@ -52,6 +52,14 @@ export default {
       title: 'Job Board',
       jobs: [],
       id: null
+    }
+  },
+  computed: {
+    user () {
+      return this.$store.getters.user
+    },
+    userIsAuthenticated () {
+      return this.$store.getters.userIsAuthenticated
     }
   },
   watch: {
