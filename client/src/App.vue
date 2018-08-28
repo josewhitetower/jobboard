@@ -3,20 +3,18 @@
     <v-app>     
       <v-content fluid>
         <v-container>
-           <div id="app"
-           >
+           <div id="app">
            <page-header></page-header>
            <router-view/>
            <v-snackbar
-                  v-model="snackbar"
-                  :color= color
-                  :timeout="timeout"
-                  top
-                
-                 >
+              v-model="snackbar"
+              :color= color
+              :timeout="timeout"
+              top
+            >
               {{ text }}
-      <v-btn dark flat @click.native="snackbar = false">x</v-btn>
-    </v-snackbar>
+              <v-btn dark flat @click.native="snackbar = false">x</v-btn>
+           </v-snackbar>
              </div>
         </v-container>
       </v-content>

@@ -22,19 +22,19 @@
         <v-toolbar-items>
             <!-- <router-link to="register"> -->
                 <v-btn flat dark
-                    v-if="!$store.state.isUserLoggedIn"
+                    v-if="!userIsAuthenticated"
                     :to="{name: 'login'}"
                 >
                     Log in
                 </v-btn>
                 <v-btn flat dark
-                    v-if="!$store.state.isUserLoggedIn"
+                    v-if="!userIsAuthenticated"
                     :to="{name: 'register'}"
                 >
                     Sign Up
                 </v-btn>
                 <v-btn flat dark
-                    v-if="$store.state.isUserLoggedIn"
+                    v-if="userIsAuthenticated"
                     @click="logout"
                 >
                    Log out
@@ -50,10 +50,25 @@ export default {
   methods: {
 
     logout () {
-      this.$store.dispatch('setToken', null)
-      this.$store.dispatch('setUser', null)
-      this.$router.push('/')
-      this.$bus.$emit('message', {message: 'Bye...', color: 'success'})
+    //   this.$store.dispatch('setToken', null)
+     // this.$store.dispatch('setUser', null)
+      this.$store.dispatch('logUserOut')
+    }
+  },
+  computed: {
+    user () {
+      return this.$store.getters.user
+    },
+    userIsAuthenticated () {
+      return this.$store.getters.userIsAuthenticated
+    }
+  },
+  watch: {
+    user (value) {
+      if (value === null || value === undefined) {
+        this.$router.push('/')
+        this.$bus.$emit('message', {message: 'Bye...', color: 'success'})
+      }
     }
   }
 }

@@ -1,6 +1,8 @@
 // The Vue build version to load with the `import` command
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue'
+import firebase from 'firebase/app'
+import firebaseConfig from './helpers/firebaseConfig'
 import App from './App'
 import Vuetify from 'vuetify'
 import {sync} from 'vuex-router-sync'
@@ -28,5 +30,11 @@ new Vue({
   router,
   store,
   template: '<App/>',
-  components: { App }
+  components: { App },
+  created () {
+    firebase.initializeApp(firebaseConfig)
+    firebase.auth().onAuthStateChanged(user => {
+      this.$store.dispatch('autoSignIn', user)
+    })
+  }
 })

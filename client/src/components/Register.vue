@@ -38,7 +38,7 @@
               ></v-text-field>
              
             <v-btn 
-              @click="register" 
+              @click.prevent="register" 
               class="blue" dark
               :disabled="!valid"
               >register</v-btn>
@@ -49,6 +49,7 @@
 </template>
 <script>
 import AuthenticationService from '../services/AuthenticationService.js'
+
 export default {
 
   data () {
@@ -72,7 +73,7 @@ export default {
     }
   },
   methods: {
-    async register () {
+    async registerLegacy () {
       const User = {
         email: this.email,
         password: this.password
@@ -83,7 +84,6 @@ export default {
           if (res.data.error) {
             this.$bus.$emit('message', {message: res.data.error, color: 'error'})
           } else {
-            this.$store.dispatch('setToken', res.data.token)
             this.$store.dispatch('setUser', res.data.user)
             this.$refs.form.reset()
             this.$router.push('/jobs')
@@ -93,7 +93,32 @@ export default {
 
       // TODO: Redirect or update the jobs view
       //  this.$router.push('/')
+    },
+    register () {
+      this.$store.dispatch('signUserUp', {email: this.email, password: this.password})
     }
+  },
+  computed: {
+    user () {
+      return this.$store.getters.user
+    },
+    error () {
+      return this.$store.getters.error
+    }
+  },
+  watch: {
+    user (value) {
+      if (value !== null && value !== undefined) {
+        this.$router.push('/jobs')
+        this.$bus.$emit('message', {message: 'User succesfully registered', color: 'success'})
+      }
+    },
+    error (value) {
+      if (value !== null && value !== undefined) {
+        this.$bus.$emit('message', {message: value, color: 'error'})
+      }
+    }
+  }
 
-  }}
+}
 </script>
