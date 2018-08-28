@@ -34,6 +34,11 @@
                     Sign Up
                 </v-btn>
                 <v-btn flat dark
+                   v-if="userIsAuthenticated"
+                >
+                   {{ user.email }}
+                </v-btn>
+                <v-btn flat dark
                     v-if="userIsAuthenticated"
                     @click="logout"
                 >
