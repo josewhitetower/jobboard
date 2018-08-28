@@ -51,6 +51,9 @@ export default {
   computed: {
     user () {
       return this.$store.getters.user
+    },
+    error () {
+      return this.$store.getters.error
     }
   },
   watch: {
@@ -58,6 +61,11 @@ export default {
       if (value !== null && value !== undefined) {
         this.$router.push('/jobs')
         this.$bus.$emit('message', {message: 'Welcome...', color: 'success'})
+      }
+    },
+    error (value) {
+      if (value !== null && value !== undefined) {
+        this.$bus.$emit('message', {message: value, color: 'error'})
       }
     }
   },

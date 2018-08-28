@@ -11,7 +11,8 @@ export default new Vuex.Store({
   state: {
     // token: null,
     user: null,
-    isUserLoggedIn: false
+    isUserLoggedIn: false,
+    error: null
   },
   mutations: {
     // setToken (state, token) {
@@ -24,6 +25,9 @@ export default new Vuex.Store({
     // },
     setUser (state, payload) {
       state.user = payload
+    },
+    setError (state, payload) {
+      state.error = payload
     }
   },
   actions: {
@@ -34,15 +38,23 @@ export default new Vuex.Store({
     //   commit('setUser', user)
     // },
     signUserUp ({commit}, payload) {
+      commit('setError', null)
       firebase.auth().createUserWithEmailAndPassword(payload.email, payload.password)
       .then(user => {
         commit('setUser', user)
       })
+      .catch(e => {
+        commit('setError', e.message)
+      })
     },
     signUserIn ({commit}, payload) {
+      commit('setError', null)
       firebase.auth().signInWithEmailAndPassword(payload.email, payload.password)
       .then(user => {
         commit('setUser', user)
+      })
+      .catch(e => {
+        commit('setError', e.message)
       })
     },
     logUserOut ({commit}) {
@@ -50,6 +62,9 @@ export default new Vuex.Store({
       .then(() => {
         commit('setUser', null)
       })
+    },
+    autoSignIn ({commit}, payload) {
+      commit('setUser', payload)
     }
   },
   getters: {
@@ -58,6 +73,9 @@ export default new Vuex.Store({
     },
     userIsAuthenticated (state) {
       return state.user !== null && state.user !== undefined
+    },
+    error (state) {
+      return state.error
     }
   }
 })
