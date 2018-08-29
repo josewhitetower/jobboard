@@ -27,29 +27,34 @@
                     :to="{name: 'add'}"
                     >
                  <v-icon>note_add</v-icon>
+                 ADD JOB
                 </v-btn>
                 <v-btn flat dark
                     v-if="!userIsAuthenticated"
                     :to="{name: 'login'}"
                 >
-                    Log in
+                     <v-icon>lock</v-icon>                     
+                  LOGIN
                 </v-btn>
                 <v-btn flat dark
                     v-if="!userIsAuthenticated"
                     :to="{name: 'register'}"
                 >
-                    Sign Up
+                  <v-icon>person_add</v-icon>
+                  SIGN IN
                 </v-btn>
                 <v-btn flat dark
                    v-if="userIsAuthenticated"
                 >
+                    <v-icon>person_pin</v-icon>
                    {{ user.email }}
                 </v-btn>
                 <v-btn flat dark
                     v-if="userIsAuthenticated"
                     @click="logout"
                 >
-                   Log out
+                   <v-icon>exit_to_app</v-icon>
+                   LOGOUT
                 </v-btn>
             <!-- </router-link> -->
         </v-toolbar-items>
