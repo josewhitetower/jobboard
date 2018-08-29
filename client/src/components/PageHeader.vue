@@ -21,6 +21,13 @@
         <v-spacer></v-spacer>
         <v-toolbar-items>
             <!-- <router-link to="register"> -->
+                 <v-btn      
+                    v-if="userIsAuthenticated"       
+                    flat dark
+                    :to="{name: 'add'}"
+                    >
+                 <v-icon>note_add</v-icon>
+                </v-btn>
                 <v-btn flat dark
                     v-if="!userIsAuthenticated"
                     :to="{name: 'login'}"

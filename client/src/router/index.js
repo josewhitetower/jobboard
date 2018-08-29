@@ -63,7 +63,7 @@ let router = new Router({
 
 router.beforeEach((to, from, next) => {
   if (to.matched.some(record => record.meta.requiredAuth)) {
-    if (!store.user) {
+    if (!store.state.user) {
       next({
         path: '/login',
         query: {
@@ -74,7 +74,7 @@ router.beforeEach((to, from, next) => {
       next()
     }
   } else if (to.matched.some(record => record.meta.requiredGuest)) {
-    if (store.user) {
+    if (store.state.user) {
       next({
         path: '/',
         query: {

@@ -7,18 +7,7 @@
           :to="{name: 'add'}"
            slot="action"
            >
-              <v-btn      
-                v-if="userIsAuthenticated"       
-                fab
-                class="blue accent-2"
-                light
-                small
-                absolute
-                right
-                middle
-             >
-            <v-icon>add</v-icon>
-        </v-btn>
+             
         </router-link>
           <v-card v-for="job in jobs" :key="job.id" class="job">
             <v-layout>
