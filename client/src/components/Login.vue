@@ -2,7 +2,7 @@
   <v-layout column>
     <v-flex >
       <panel title = "Login">
-        <v-form class="pl-4 pr-4 pb-2 pt-2" ref="form" lazy-validation v-model="valid">     
+        <v-form class="pl-4 pr-4 pb-2 pt-2" ref="form" v-model="valid">     
           <v-text-field
                 label="E-mail"
                 v-model="email"
@@ -30,7 +30,6 @@
 </template>
 <script>
 import AuthenticationService from '../services/AuthenticationService.js'
-import firebase from 'firebase'
 
 export default {
 

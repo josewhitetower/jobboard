@@ -57,7 +57,7 @@ export default {
       return this.$store.getters.userIsAuthenticated
     },
     isAuthor () {
-      return this.user.uid === this.job.author
+      return this.user && this.user.uid === this.job.author
     }
   },
   methods: {
@@ -72,6 +72,9 @@ export default {
       })
     },
     async apply () {
+      if (!this.user) {
+        this.$router.push('/login')
+      }
       console.log('apply')
     }
   }

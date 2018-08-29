@@ -6,7 +6,7 @@ import Register from '@/components/Register'
 import Login from '@/components/Login'
 import Job from '@/components/Job'
 import JobEdit from '@/components/JobEdit'
-import firebase from 'firebase'
+import store from './../store/store'
 
 Vue.use(Router)
 
@@ -63,7 +63,7 @@ let router = new Router({
 
 router.beforeEach((to, from, next) => {
   if (to.matched.some(record => record.meta.requiredAuth)) {
-    if (!firebase.auth().currentUser) {
+    if (!store.user) {
       next({
         path: '/login',
         query: {
@@ -74,7 +74,7 @@ router.beforeEach((to, from, next) => {
       next()
     }
   } else if (to.matched.some(record => record.meta.requiredGuest)) {
-    if (firebase.auth().currentUser) {
+    if (store.user) {
       next({
         path: '/',
         query: {

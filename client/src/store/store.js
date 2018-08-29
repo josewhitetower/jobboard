@@ -1,7 +1,8 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 // import createPersistedState from 'vuex-persistedstate'
-import * as firebase from 'firebase'
+import firebase from 'firebase/app'
+import 'firebase/auth'
 
 Vue.use(Vuex)
 

@@ -6,7 +6,6 @@
           class="pl-4 pr-4 pb-2 pt-2" 
           ref="form" 
           v-model="valid" 
-          lazy-validation
           >     
           <v-text-field
                 label="E-mail"
@@ -54,14 +53,15 @@ export default {
 
   data () {
     return {
-      valid: true,
+      valid: false,
       password: '',
       passwordRules: [
         (v) => !!v || 'Password is required',
-        (v) => v.length >= 3 || 'Password must be more than 3 characters'
+        (v) => v.length >= 6 || 'Password must be more than 6 characters'
       ],
       confirmPassword: '',
       confirmPasswordRules: [
+        (v) => this.password !== '',
         (v) => this.password === this.confirmPassword || 'Passwords do not coincide'],
       email: '',
       emailRules: [
