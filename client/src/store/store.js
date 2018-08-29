@@ -11,7 +11,6 @@ export default new Vuex.Store({
   state: {
     // token: null,
     user: null,
-    isUserLoggedIn: false,
     error: null
   },
   mutations: {

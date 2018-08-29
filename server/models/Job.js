@@ -38,6 +38,10 @@ const JobSchema = new Schema({
             required: 'Address is required',
         },
     },
+    author: {
+        type: String,
+        required: [true, 'Author is required'],
+    },
 });
 
 const Job = mongoose.model('job', JobSchema);

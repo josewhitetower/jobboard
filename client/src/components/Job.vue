@@ -8,17 +8,23 @@
                  <div class="job-company">     {{job.company}}</div>
                 <div class="job-description">     {{job.description}}</div>   
                  <v-btn 
-                 v-if="userIsAuthenticated"  
+                 v-if="isAuthor"  
                   :to="{ path: `/jobs/${job._id}/edit`}" 
                   class="blue" 
                   dark
                   >Edit </v-btn>             
                  <v-btn 
-                 v-if="userIsAuthenticated" 
+                 v-if="isAuthor" 
                  @click="deleteJob"
                   class="danger"                   
                   dark
                   >Delete </v-btn>             
+                 <v-btn 
+                 v-if="!isAuthor" 
+                 @click="apply"
+                  class="blue"                   
+                  dark
+                  >Apply </v-btn>             
               </v-flex>
            
             </v-layout>
@@ -49,6 +55,9 @@ export default {
     },
     userIsAuthenticated () {
       return this.$store.getters.userIsAuthenticated
+    },
+    isAuthor () {
+      return this.user.uid === this.job.author
     }
   },
   methods: {
@@ -61,6 +70,9 @@ export default {
           this.$bus.$emit('message', {message: 'Job deleted', color: 'success'})
         }
       })
+    },
+    async apply () {
+      console.log('apply')
     }
   }
 }

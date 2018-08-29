@@ -57,9 +57,15 @@ export default {
 
     }
   },
+  computed: {
+    user () {
+      return this.$store.getters.user
+    }
+  },
   methods: {
     async add () {
       const Job = this.job
+      Job.author = this.user.uid
       const response = await JobService.add(Job)
       console.log(Job)
       console.log(response)
