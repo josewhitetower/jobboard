@@ -20,34 +20,14 @@
                 </v-btn>
         <v-spacer></v-spacer>
         <v-toolbar-items>
-            <!-- <router-link to="register"> -->
                  <v-btn      
-                    v-if="userIsAuthenticated"       
+                    v-for="menuItem in menuItems" 
+                    :key="menuItem.title"     
                     flat dark
-                    :to="{name: 'add'}"
+                    :to="menuItem.route"
                     >
-                 <v-icon>note_add</v-icon>
-                 ADD JOB
-                </v-btn>
-                <v-btn flat dark
-                    v-if="!userIsAuthenticated"
-                    :to="{name: 'login'}"
-                >
-                     <v-icon>lock</v-icon>                     
-                  LOGIN
-                </v-btn>
-                <v-btn flat dark
-                    v-if="!userIsAuthenticated"
-                    :to="{name: 'register'}"
-                >
-                  <v-icon>person_add</v-icon>
-                  SIGN IN
-                </v-btn>
-                <v-btn flat dark
-                   v-if="userIsAuthenticated"
-                >
-                    <v-icon>person_pin</v-icon>
-                   {{ user.email }}
+                    <v-icon>{{menuItem.icon}}</v-icon>
+                    {{menuItem.title}}
                 </v-btn>
                 <v-btn flat dark
                     v-if="userIsAuthenticated"
@@ -78,6 +58,16 @@ export default {
     },
     userIsAuthenticated () {
       return this.$store.getters.userIsAuthenticated
+    },
+    menuItems () {
+      return this.userIsAuthenticated ? [
+          {title: 'ADD JOB', route: {name: 'add'}, icon: 'note_add'},
+          {title: this.user.email, route: {name: 'user'}, icon: 'person_pin'}
+      ]
+        : [
+          {title: 'LOGIN', route: {name: 'login'}, icon: 'lock'},
+          {title: 'SIGN IN', route: {name: 'register'}, icon: 'person_add'}
+        ]
     }
   },
   watch: {
