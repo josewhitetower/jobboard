@@ -62,7 +62,7 @@ export default {
     menuItems () {
       return this.userIsAuthenticated ? [
           {title: 'ADD JOB', route: {name: 'add'}, icon: 'note_add'},
-          {title: this.user.email, route: {name: 'user'}, icon: 'person_pin'}
+          {title: this.user.email, route: {name: 'profile'}, icon: 'person_pin'}
       ]
         : [
           {title: 'LOGIN', route: {name: 'login'}, icon: 'lock'},

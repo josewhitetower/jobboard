@@ -6,6 +6,7 @@ import Register from '@/components/Register'
 import Login from '@/components/Login'
 import Job from '@/components/Job'
 import JobEdit from '@/components/JobEdit'
+import Profile from '@/components/Profile'
 import store from './../store/store'
 
 Vue.use(Router)
@@ -51,6 +52,14 @@ let router = new Router({
       path: '/add',
       name: 'add',
       component: JobAdd,
+      meta: {
+        requiredAuth: true
+      }
+    },
+    {
+      path: '/profile',
+      name: 'profile',
+      component: Profile,
       meta: {
         requiredAuth: true
       }
