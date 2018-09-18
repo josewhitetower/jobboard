@@ -1,8 +1,7 @@
 <template>
      <v-navigation-drawer
       v-model="localDrawer"
-      absolute
-      temporary
+      fixed
     >
       <v-list class="pa-1">
         <v-list-tile avatar 
@@ -35,12 +34,14 @@
             <v-list-tile-title>{{ item.title }}</v-list-tile-title>
           </v-list-tile-content>
         </v-list-tile>
-        <v-list-tile>
+        <v-list-tile 
+            v-if="userIsAuthenticated">
             <v-list-tile-action>
             <v-icon>exit_to_app</v-icon>
           </v-list-tile-action>
 
-           <v-list-tile-content @click="logout">
+           <v-list-tile-content
+            @click="logout">
             <v-list-tile-title>LOGOUT</v-list-tile-title>
           </v-list-tile-content>
         </v-list-tile>

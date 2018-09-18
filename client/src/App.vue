@@ -4,6 +4,12 @@
       <v-content fluid>
         <v-container>
            <div id="app">
+           <page-header 
+           @drawer="drawer =!drawer"
+           :user="user"
+           :menu-items="menuItems"
+           :user-is-authenticated="userIsAuthenticated">
+           </page-header>
           <nav-drawer
           class="hidden-md-and-up"
           :drawer="drawer"
@@ -12,12 +18,6 @@
           :user="user"
           :user-is-authenticated="userIsAuthenticated"
           ></nav-drawer>
-           <page-header 
-           @drawer="drawer =!drawer"
-           :user="user"
-           :menu-items="menuItems"
-           :user-is-authenticated="userIsAuthenticated">
-           </page-header>
            
            <router-view/>
            <v-snackbar
