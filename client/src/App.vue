@@ -7,6 +7,7 @@
           <nav-drawer
           class="hidden-md-and-up"
           :drawer="drawer"
+          @drawer="(localDrawer)=> drawer=localDrawer"
           :menu-items="menuItems"
           :user="user"
           :user-is-authenticated="userIsAuthenticated"

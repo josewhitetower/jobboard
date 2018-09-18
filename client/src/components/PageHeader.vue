@@ -1,23 +1,18 @@
 <template>
 
     <v-toolbar fixed class="blue"  dark>
-        <span class="PageHeader-logo">
-            <v-toolbar-title>
-              
-            </v-toolbar-title>
-            <v-toolbar-title 
-                >
-                <v-icon class="mr-4 hidden-md-and-up"
-                 @click.stop="$emit('drawer')
-                ">menu</v-icon>              
+        
+            <v-toolbar-side-icon
+            class="hidden-md-and-up"
+            @click.native.stop="onClick">
+             
+            </v-toolbar-side-icon>
+            <v-toolbar-title
+            flat dark
+            @click= "$router.push('/')" 
+                >            
                 Job Board 
             </v-toolbar-title>
-        </span>
-         <v-btn flat dark             
-                    :to="{name: 'jobs'}"
-                >
-                  Browse
-                </v-btn>
         <v-spacer></v-spacer>
         <v-toolbar-items         
          class="hidden-sm-and-down">
@@ -50,6 +45,9 @@ export default {
       //   this.$store.dispatch('setToken', null)
       // this.$store.dispatch('setUser', null)
       this.$store.dispatch('logUserOut')
+    },
+    onClick () {
+      this.$emit('drawer')
     }
   },
   props: ['userIsAuthenticated', 'user', 'menuItems'],

@@ -1,6 +1,6 @@
 <template>
      <v-navigation-drawer
-      v-model="drawer"
+      v-model="localDrawer"
       absolute
       temporary
     >
@@ -57,8 +57,20 @@ export default {
       // this.$store.dispatch('setUser', null)
       this.$store.dispatch('logUserOut')
     }
+  },
+  data () {
+    return {
+      localDrawer: this.drawer
+    }
+  },
+  watch: {
+    drawer () {
+      this.localDrawer = this.drawer
+    },
+    localDrawer () {
+      this.$emit('drawer', this.localDrawer)
+    }
   }
-
 }
 </script>
 
