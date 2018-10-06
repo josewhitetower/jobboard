@@ -4,7 +4,8 @@ A simple Job Board with user authentication
 
 ## Requirements
 1. [Node.js and npm](http://nodejs.org)
-2. [MongoDB](http:///mongodb.org)
+2. [Docker](http:///docker.com)
+3. [MongoDB](http://mongodb.com)
 
 ## URL
 
