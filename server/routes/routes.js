@@ -8,14 +8,9 @@ const JobController = require('../controllers/JobController');
 const AuthenticationController = require('../controllers/AuthenticationController');
 const Job = require('../models/Job');
 
-const prod = true;
+const databaseConfig = config.database;
+databaseConfig.connect();
 
-const connect = prod
-    ? `mongodb://${config.db.user}:${config.db.password}@${config.db.host}/${config.db.database}`
-    : `mongodb://${config.db.host}/${config.db.database}`;
-
-// const connect = process.env.DATABASE_URL || 'http://localhost';
-mongoose.connect(connect);
 
 mongoose.Promise = global.Promise;
 

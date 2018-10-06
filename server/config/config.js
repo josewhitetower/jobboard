@@ -1,15 +1,19 @@
-// require('dotenv').config({ path: 'variables.env' })
+require('dotenv').config({ path: 'variables.env' });
+const mongoose = require('mongoose');
 
 module.exports = {
-    port: 8081,
-    db: {
-        database: process.env.DB_NAME || 'jobboard',
-        user: process.env.DB_USER || 'root',
-        password: process.env.DB_PASS || 'root',
-        host: process.env.DB_HOST || 'localhost',
+    port: process.env.PORT,
+    database: {
+        mongoose,
+        connect: () => {
+            mongoose.connect(process.env.DB_URL, { useNewUrlParser: true, useCreateIndex: true });
+        },
+        disconnect: (done) => {
+            mongoose.disconnect(done);
+        },
     },
     authentication: {
-        jwtSecret: process.env.JWT_SECRET || 'secret',
+        jwtSecret: process.env.JWT_SECRET,
     },
-    env: process.env.ENV || 'dev',
+    env: process.env.ENV,
 };
