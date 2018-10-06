@@ -7,8 +7,6 @@ services:
       - 8080:8080
     volumes:
       - ./client:/data
-    environment:
-      - API_URL=http://localhost:8081/
 
   server:
     build: ./server

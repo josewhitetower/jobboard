@@ -4,7 +4,6 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const morgan = require('morgan');
 const routes = require('../routes/routes.js');
-const config = require('../config/config.js');
 
 const app = express();
 // connect to mongodb
@@ -20,4 +19,6 @@ app.use((err, req, res) => {
     res.send({ error: err.message });
 });
 
-app.listen(process.env.PORT || config.port);
+app.listen(process.env.PORT, () => {
+    console.log(`Server running in port: ${process.env.PORT}`);
+});
