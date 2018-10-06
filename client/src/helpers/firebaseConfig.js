@@ -1,5 +1,5 @@
 export default {
-  apiKey: 'AIzaSyAY7_AwOvVF1KgOEYF7bTqQGn3tyV-LeHo',
+  apiKey: process.env.API_KEY,
   authDomain: 'jt-jobboard-e0156.firebaseapp.com',
   databaseURL: 'https://jt-jobboard-e0156.firebaseio.com',
   projectId: 'jt-jobboard-e0156',
