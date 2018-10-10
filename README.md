@@ -14,6 +14,7 @@ A simple Job Board with user authentication
 1. Clone this repo
 ```bash
 git clone https://github.com/josewhitetower/jobboard.git
+git@github.com:josewhitetower/jobboard.git
 ```
 2. A .env file is needed in /server/ folder with the following content
 ```
