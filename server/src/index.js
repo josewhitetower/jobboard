@@ -19,6 +19,6 @@ app.use((err, req, res) => {
     res.send({ error: err.message });
 });
 
-app.listen(process.env.PORT, () => {
-    console.log(`Server running in port: ${process.env.PORT}`);
+app.listen(process.env.BACKEND_PORT, () => {
+    console.log(`Server running in port: ${process.env.BACKEND_PORT}`);
 });

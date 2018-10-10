@@ -11,7 +11,7 @@ services:
   server:
     build: ./server
     ports:
-      - ${PORTBE}:${PORTBE}
+      - ${BACKEND_PORT}:${BACKEND_PORT}
     volumes:
       - ./server:/data
     # depends_on:

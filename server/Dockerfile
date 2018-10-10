@@ -7,7 +7,7 @@ RUN ["chmod", "+x", "entrypoint/entrypoint.sh"]
 # Copy or mount node app here
 WORKDIR /data/
 
-EXPOSE 8081
+# EXPOSE 8081
 
 ENTRYPOINT ["sh","/entrypoint/entrypoint.sh"]
 
