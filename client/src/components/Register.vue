@@ -47,7 +47,6 @@
   </v-layout>
 </template>
 <script>
-import AuthenticationService from '../services/AuthenticationService.js'
 
 export default {
 
@@ -73,27 +72,6 @@ export default {
     }
   },
   methods: {
-    async registerLegacy () {
-      const User = {
-        email: this.email,
-        password: this.password
-
-      }
-      await AuthenticationService.register(User)
-        .then(res => {
-          if (res.data.error) {
-            this.$bus.$emit('message', {message: res.data.error, color: 'error'})
-          } else {
-            this.$store.dispatch('setUser', res.data.user)
-            this.$refs.form.reset()
-            this.$router.push('/jobs')
-            this.$bus.$emit('message', {message: 'User succesfully registered', color: 'success'})
-          }
-        })
-
-      // TODO: Redirect or update the jobs view
-      //  this.$router.push('/')
-    },
     register () {
       this.$store.dispatch('signUserUp', {email: this.email, password: this.password})
     }

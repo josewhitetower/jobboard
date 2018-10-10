@@ -29,7 +29,6 @@
   </v-layout>
 </template>
 <script>
-import AuthenticationService from '../services/AuthenticationService.js'
 
 export default {
 
@@ -69,32 +68,6 @@ export default {
     }
   },
   methods: {
-    async loginLegacy () {
-      const User = {
-        email: this.email,
-        password: this.password
-
-      }
-      await AuthenticationService.login(User)
-      .then(res => {
-        if (res.data.error) {
-          this.EventBus.$emit('message', {message: res.data.error, color: 'error'})
-        } else {
-          this.$store.dispatch('setToken', res.data.token)
-          this.$store.dispatch('setUser', res.data.user)
-          this.$refs.form.reset()
-          this.$router.push('/')
-          this.$bus.$emit('message', {message: 'Welcome...', color: 'success'})
-        }
-      })
-      .catch(err => console.log(err))
-
-      //   this.$router.push('/jobs')
-      // }
-
-      // TODO: Redirect or update the jobs view
-      //  this.$router.push('/')
-    },
     login () {
       this.$store.dispatch('signUserIn', {email: this.email, password: this.password})
     }
