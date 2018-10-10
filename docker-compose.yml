@@ -11,13 +11,13 @@ services:
   server:
     build: ./server
     ports:
-      - 8081:8081
+      - ${PORTBE}:${PORTBE}
     volumes:
       - ./server:/data
     # depends_on:
     #   - server-database
     env_file:
-      - ./server/variables.env
+      - ./.env
     # environment:
     #   - DATABASE_URL=server-database     
 
@@ -26,4 +26,5 @@ services:
   #   ports:
   #     - 27017:27017
   #   volumes:
+  #     - ./db:/data/db
   #     - ./db:/data/db
