@@ -19,11 +19,11 @@ router.get('/jobs/:id', JobController.show);
 router.put('/jobs/:id', JobController.edit);
 router.delete('/jobs/:id', JobController.delete);
 router.get('/', (req, res, next) => {
-    Job.find({})
-        .then((jobs) => {
-            res.send(jobs);
-        })
-        .catch(next);
+	Job.find({})
+		.then((jobs) => {
+			res.send(jobs);
+		})
+		.catch(next);
 });
 
 module.exports = router;
