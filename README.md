@@ -15,12 +15,12 @@ A simple Job Board with user authentication
 ```bash
 git clone https://github.com/josewhitetower/jobboard.git
 ```
-2. A variables.env file is needed in /server/ folder with the following content
+2. A .env file is needed in /server/ folder with the following content
 ```
-// variables.env
+// .env
 
 DB_URL=your database url
-PORT=your port
+BACKEND_PORT=your port
 ```
 3. A config.js file is needed in /client/config with the following content 
 https://developers.google.com/maps/documentation/javascript/get-api-key
