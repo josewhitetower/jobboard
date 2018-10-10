@@ -3,6 +3,6 @@ import axios from 'axios'
 // baseURL: 'https://jt-jobboard.herokuapp.com/'
 export default () => {
   return axios.create({
-    baseURL: process.env.API_URL || 'http://localhost:8081/'
+    baseURL: process.env.API_URL || 'http://localhost:8082/'
   })
 }
