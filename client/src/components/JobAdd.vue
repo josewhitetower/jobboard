@@ -6,8 +6,7 @@
         <v-form class="pl-4 pr-4 pb-2 pt-2" ref="form"  v-model="valid">
             <v-text-field  label="Title"  v-model ="job.title" required :rules="titleRules" > </v-text-field>
             <v-text-field label="Company" v-model ="job.company" required :rules="companyRules" ></v-text-field>          
-            <v-text-field label="Address" v-model ="job.location.address" required :rules="companyRules" ></v-text-field>          
-            <!-- <vuetify-google-autocomplete
+            <vuetify-google-autocomplete
                 id="map"
                 append-icon="search"
                 placeholder="Address *"
@@ -16,9 +15,7 @@
                 :rules="addressRules"
                  v-on:placechanged="getAddressData">
           </vuetify-google-autocomplete>
-            <v-text-field type="number" label="Address Lng" v-model ="job.location.coordinates[0]" required :rules="addressRules" ></v-text-field>
-            <v-text-field type="number" label="Address Lat" v-model ="job.location.coordinates[1]" required :rules="addressRules" ></v-text-field> -->
-            <v-text-field label="Description" v-model ="job.description" required  :rules="descriptionRules" textarea></v-text-field>
+             <v-text-field label="Description" v-model ="job.description" required  :rules="descriptionRules" textarea></v-text-field>
              <v-btn flat light @click="clear">clear</v-btn>
             <v-btn @click="add" class="blue"  :disabled="!valid">add</v-btn>
           </v-form>  
