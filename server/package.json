@@ -19,7 +19,7 @@
     "eslint": "^4.13.0",
     "express": "^4.16.2",
     "jsonwebtoken": "^8.1.0",
-    "mongoose": "^4.13.6",
+    "mongoose": "^5.3.2",
     "nodemon": "^1.17.5"
   },
   "devDependencies": {
