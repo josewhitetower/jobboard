@@ -2,7 +2,6 @@ require('dotenv').config({ path: './../../.env' });
 const mongoose = require('mongoose');
 
 module.exports = {
-    port: process.env.PORT,
     database: {
         mongoose,
         connect: () => {

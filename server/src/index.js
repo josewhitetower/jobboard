@@ -2,13 +2,13 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
-const morgan = require('morgan');
+
 const routes = require('../routes/routes.js');
 
 const app = express();
 // connect to mongodb
 
-app.use(morgan('combine'));
+
 app.use(bodyParser.json());
 app.use(cors());
 
