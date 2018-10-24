@@ -20,5 +20,8 @@ export default {
   delete (job) {
     console.log('deleting')
     return Api().delete(`jobs/${job._id}`)
+  },
+  apply (application) {
+    return Api().post(`jobs/apply`, application)
   }
 }

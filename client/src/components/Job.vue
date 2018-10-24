@@ -24,7 +24,7 @@
                  @click="apply"
                   class="blue"                   
                   dark
-                  >Apply </v-btn>             
+                  >{{applyButtonText}} </v-btn>             
               </v-flex>
            
             </v-layout>
@@ -58,6 +58,12 @@ export default {
     },
     isAuthor () {
       return this.user && this.user.uid === this.job.author
+    },
+    applyButtonText () {
+      return this.job.applicants &&
+            this.job.applicants.includes(this.user && this.user.uid)
+            ? 'Unapply'
+            : 'Apply'
     }
   },
   methods: {
@@ -75,7 +81,18 @@ export default {
       if (!this.user) {
         this.$router.push('/login')
       }
-      console.log('apply')
+      const application = {
+        job: this.job._id,
+        user: this.user.uid
+      }
+      await JobService.apply(application).then((res) => {
+        if (res.data.error) {
+          this.$bus.$emit('message', {message: res.data.error, color: 'error'})
+        } else {
+          this.$bus.$emit('message', {message: res.data.message, color: 'success'})
+          this.job = res.data.job
+        }
+      })
     }
   }
 }

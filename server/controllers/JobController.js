@@ -49,4 +49,22 @@ module.exports = {
             res.send(job);
         });
     },
+
+    async apply(req, res, next) {
+        await Job.findById(req.body.job)
+            .then((job) => {
+                let message;
+                if (!job.applicants.includes(req.body.user)) {
+                    job.applicants.push(req.body.user);
+                    message = 'Applied';
+                } else {
+                    job.applicants = job.applicants
+                        .filter(applicants => applicants !==req.body.user);
+                    message = 'Unapplied';
+                }
+                job.save();                    
+                res.send({message , job});
+            })
+            .catch(err => res.send({ error: err.message }));
+    }
 };

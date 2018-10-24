@@ -17,6 +17,8 @@ router.post('/add', JobController.add);
 router.get('/jobs', JobController.jobs);
 router.get('/jobs/:id', JobController.show);
 router.put('/jobs/:id', JobController.edit);
+router.post('/jobs/:id/apply/:user', JobController.apply);
+router.post('/jobs/apply', JobController.apply);
 router.delete('/jobs/:id', JobController.delete);
 router.get('/', (req, res, next) => {
 	Job.find({})
