@@ -15,8 +15,7 @@
                 :rules="addressRules"
                  v-on:placechanged="getAddressData">
           </vuetify-google-autocomplete>
-             <v-text-field type="number" label="Address Lng" v-model ="job.location.coordinates[0]" required :rules="addressRules" ></v-text-field>
-            <v-text-field type="number" label="Address Lat" v-model ="job.location.coordinates[1]" required :rules="addressRules" ></v-text-field>
+            
             <v-text-field label="Description" v-model ="job.description" required  :rules="descriptionRules" textarea></v-text-field>
              <v-btn flat light @click="clear">clear</v-btn>
             <v-btn @click="save" class="blue"  :disabled="!valid">save</v-btn>
